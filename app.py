@@ -4,8 +4,10 @@ from flask_jwt import JWT
 from security import identity, authenticate
 from db import db
 
+from resources.user import UserRegister
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = r"sqlite:///C:\Users\Miguel\\Documents\\Udemy\\REST API with flask\\Section 6\\data.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = r"sqlite:///data.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'miguel'
 api = Api(app)
@@ -24,6 +26,7 @@ class HelloWorld(Resource):
 jwt = JWT(app, authenticate, identity)  # /auth
 
 api.add_resource(HelloWorld, '/hello')
+api.add_resource(UserRegister, '/register')
 
 
 if __name__ == '__main__':
